@@ -34,6 +34,8 @@ for n = 1:length(ChannelNames_pre)
        
 end
 
+realchannelnumber = realchannelnumber';
+
 pre = zeros(datapoints2use,length(ChannelNames_pre));
 post = zeros(datapoints2use,length(ChannelNames_pre));
 
@@ -53,9 +55,9 @@ for n=1:length(ChannelNames_pre)
     
 end
 
-Slopes_pre = [realchannelnumber;Slopes_pre];
-Slopes_post = [realchannelnumber;Slopes_post];
-PreAndPost.Slopes = [Slopes_pre,Slopes_post];
+Slopes_pre = [realchannelnumber,Slopes_pre'];
+Slopes_post = [realchannelnumber,Slopes_post'];
+PreAndPost.Slopes = [Slopes_pre;Slopes_post];
 
 
 
@@ -83,12 +85,12 @@ for n=1:length(ChannelNames_pre)
     
 end
 
-EarlyX_pre = [realchannelnumber;EarlyX_pre];
-EarlyX_post = [realchannelnumber;EarlyX_post];
-PreAndPost.EarlyX = [EarlyX_pre,EarlyX_post];
-EarlyY_pre = [realchannelnumber;EarlyY_pre];
-EarlyY_post = [realchannelnumber;EarlyY_post];
-PreAndPost.EarlyY = [EarlyY_pre,EarlyY_post];
+EarlyX_pre = [realchannelnumber,EarlyX_pre'];
+EarlyX_post = [realchannelnumber,EarlyX_post'];
+PreAndPost.EarlyX = [EarlyX_pre;EarlyX_post];
+EarlyY_pre = [realchannelnumber,EarlyY_pre'];
+EarlyY_post = [realchannelnumber,EarlyY_post'];
+PreAndPost.EarlyY = [EarlyY_pre;EarlyY_post];
 
 % Late
 
@@ -113,12 +115,12 @@ for n=1:length(ChannelNames_pre)
     
 end
 
-LateX_pre = [realchannelnumber;LateX_pre];
-LateX_post = [realchannelnumber;LateX_post];
-PreAndPost.LateX = [LateX_pre,LateX_post];
-LateY_pre = [realchannelnumber;LateY_pre];
-LateY_post = [realchannelnumber;LateY_post];
-PreAndPost.LateY = [LateY_pre,LateY_post];
+LateX_pre = [realchannelnumber,LateX_pre'];
+LateX_post = [realchannelnumber,LateX_post'];
+PreAndPost.LateX = [LateX_pre;LateX_post];
+LateY_pre = [realchannelnumber,LateY_pre'];
+LateY_post = [realchannelnumber,LateY_post'];
+PreAndPost.LateY = [LateY_pre;LateY_post];
 
 names = fieldnames(PreAndPost);
 
