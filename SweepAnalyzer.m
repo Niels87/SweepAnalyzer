@@ -134,4 +134,4 @@ filename = [erase(MultichannelDataFile,'.mat'),'_analyzed.mat'];
 filename = [outputfolder,filename];
 save(filename,'MultiChannelData_analyzed','Config');
 
-
+save2csv(MultiChannelData_analyzed,Config);
