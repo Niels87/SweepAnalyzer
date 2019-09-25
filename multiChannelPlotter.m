@@ -32,6 +32,13 @@ for i=1:length(plotvariables)
                 if strcmp(plottypes{i},'line') == 1
 %                     plothandles(m) = plot(x,y); 
                     plot(x,y); 
+%                     line_x = [Config.MinimumDetection{2} Config.MinimumDetection{3} Config.MinimumDetection{4}];
+%                     line_x = cat(1,line_x,line_x);
+%                     line_x = index2ms(line_x,Config.SamplingRate);
+%                     line_y = [-1,-1,-1,-1,-1,-1;1,1,1,1,1,1];
+%                     
+%                     line(line_x,line_y,'Color','k');
+                    
                 elseif strcmp(plottypes{i},'scatter') == 1
 %                     plothandles(m) = scatter(x,y,'.');
                     scatter(x,y,'.');                    
@@ -40,6 +47,8 @@ for i=1:length(plotvariables)
                 end
               
                 title(datastructure.(channelnames{m}).RealChannelNumber);
+               
+                
             end
         end
     end

@@ -3,7 +3,7 @@ function output = save2csv(MultiChannelData_analyzed,Config)
 MultichannelDataFile = 'PreLTP.mat';
 
 
-variables2save = {'EarlyComponents_x','LateComponents_x','LocalMaximums_x','EarlyComponents_y','LateComponents_y','LocalMaximums_y','Slopes','Slopes_Rsquared'};
+variables2save = {'EarlyComponents_x','LateComponents_x','LocalMaximums_x','EarlyComponents_y','LateComponents_y','LocalMaximums_y','Slopes','Slopes_Rsquared','AverageSweeps'};
 
 ChannelNames = fieldnames(MultiChannelData_analyzed);
 
@@ -19,9 +19,12 @@ LocalMaximums_y = zeros(length(ChannelNames),length(MultiChannelData_analyzed.(C
 Slopes = zeros(length(ChannelNames),length(MultiChannelData_analyzed.(ChannelNames{1}).Slopes)+1);
 Slopes_Rsquared = zeros(length(ChannelNames),length(MultiChannelData_analyzed.(ChannelNames{1}).Slopes_Rsquared)+1);
 
+AverageSweeps = zeros(length(ChannelNames),length(MultiChannelData_analyzed.(ChannelNames{1}).Average.Sweep)+1);
+
+
 for n=1:length(ChannelNames)
     
-    
+    % Set first column as Real Channel Number
     EarlyComponents_x(n,1)= str2double(MultiChannelData_analyzed.(ChannelNames{n}).RealChannelNumber);
     LateComponents_x(n,1)= str2double(MultiChannelData_analyzed.(ChannelNames{n}).RealChannelNumber);
     LocalMaximums_x(n,1) = str2double(MultiChannelData_analyzed.(ChannelNames{n}).RealChannelNumber);
@@ -33,8 +36,11 @@ for n=1:length(ChannelNames)
     Slopes(n,1)= str2double(MultiChannelData_analyzed.(ChannelNames{n}).RealChannelNumber);
     Slopes_Rsquared(n,1)= str2double(MultiChannelData_analyzed.(ChannelNames{n}).RealChannelNumber);
     
-    EarlyComponents_mat = cell2mat(MultiChannelData_analyzed.(ChannelNames{n}).EarlyComponents);
+    AverageSweeps(n,1) = str2double(MultiChannelData_analyzed.(ChannelNames{n}).RealChannelNumber);
     
+    
+    % Insert value into rest of matrix
+    EarlyComponents_mat = cell2mat(MultiChannelData_analyzed.(ChannelNames{n}).EarlyComponents);
     LateComponents_mat = cell2mat(MultiChannelData_analyzed.(ChannelNames{n}).LateComponents);
     LocalMaximums_mat = cell2mat(MultiChannelData_analyzed.(ChannelNames{n}).localMaximums);
     
@@ -42,17 +48,14 @@ for n=1:length(ChannelNames)
     LateComponents_x(n,2:end)= LateComponents_mat(:,1) - EndOfBaseline;
     LocalMaximums_x(n,2:end)= LocalMaximums_mat(:,1) - EndOfBaseline;
     
-
-    
     EarlyComponents_y(n,2:end)= EarlyComponents_mat(:,2);
     LateComponents_y(n,2:end)= LateComponents_mat(:,2);
     LocalMaximums_y(n,2:end)= LocalMaximums_mat(:,2);
     
-    
     Slopes(n,2:end)= MultiChannelData_analyzed.(ChannelNames{n}).Slopes;
     Slopes_Rsquared(n,2:end)= MultiChannelData_analyzed.(ChannelNames{n}).Slopes_Rsquared;
     
-    
+    AverageSweeps(n,2:end) = MultiChannelData_analyzed.(ChannelNames{n}).Average.Sweep;
     
 end
 
@@ -66,6 +69,8 @@ LocalMaximums_y = LocalMaximums_y';
 
 Slopes = Slopes';
 Slopes_Rsquared = Slopes_Rsquared';
+
+AverageSweeps = AverageSweeps';
 
 for n = 1:length(variables2save)
     

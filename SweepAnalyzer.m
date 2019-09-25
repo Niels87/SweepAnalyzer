@@ -8,7 +8,7 @@ clc; close all; clear all;
 % Output folder
 outputfolder = 'C:\Users\au258658\Documents\MATLAB\SweepAnalysis\';
 
-MultichannelDataFile = 'PreLTP.mat';
+MultichannelDataFile = 'PostLTP.mat';
 
 channelmap =    [
                 0,32,0;
@@ -26,7 +26,11 @@ channelmap =    [
                 ];
 
 % Number of sweeps to average for smoothing. 1  is no smoothing.
-SmoothingFactor = 1;
+% There are two methods of smoothing. Running average and grouped average.
+SmoothingFactor = 3;
+SmoothingMethod = 'running';
+% SmoothingMethod = 'grouped';
+
 
 % Normalize to earlycomponent?
 Normalization = 'yes';
@@ -65,6 +69,7 @@ end
 
 % Smoothingfactor
 Config.SmoothingFactor = SmoothingFactor;
+Config.SmoothingMethod = SmoothingMethod;
 
 % Normalization
 Config.Normalization = Normalization;

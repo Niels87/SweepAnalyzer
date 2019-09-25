@@ -3,10 +3,9 @@ function SingleChannel_analyzed = singleChannelAnalyzer(SingleChannelData,Config
 AllSweeps = SingleChannelData.values;
 
 %   Smoothing
-
 AllSweeps = smoothSweeps(AllSweeps,Config);
 
-%   Find the average across sweeps and insert as first sweep
+%   Find the average across sweeps
 averageSweep = mean(AllSweeps);
 % AllSweeps = cat(1,averageSweep,AllSweeps);
 
